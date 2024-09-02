@@ -1,0 +1,81 @@
+GAMS 45.3.0  c4c31d8a Nov 11, 2023          WEX-WEI x86 64bit/MS Windows - 11/27/23 16:29:23 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+   1  Sets
+   2      i loca/ 1*5 /;
+   3  Alias(i,j);
+   4   
+   5  Parameters
+   6      xi(i)    'x-coordinate for location i'
+   7      / 1 36, 2 23, 3 23, 4 10, 5 5 /
+   8      yi(i)    'y-coordinate for location i'
+   9      / 1 20, 2 30, 3 56, 4 15, 5 5 /
+  10      di(i)    'Projected demand for next period for location i'
+  11      / 1 7, 2 3, 3 2, 4 4, 5 2 /
+  12      si(i)    'Number of helicopters currently assigned to location i'
+  13      / 1 6, 2 2, 3 3, 4 3, 5 4 /;
+  14   
+  15  Scalar
+  16      c 'Transportation cost per kilometer'
+  17      / 100 /;
+  18   
+  19  Variables
+  20      myvar, zij 'Number of helicopters to be moved from location i to j';
+  21   
+  22  Positive Variables zij;
+  23   
+  24  Equations
+  25      obj 'Objective Function', balance(i);
+  26   
+  27  obj.. myvar =e= sum((i,j), sqrt(sqr(xi(j)- xi(i)) + sqr(yi(j)-yi(i))) * c * zij(i,j));
+  28   
+  29  balance(i)$(ord(i))..
+  30     if(sum(j$(ord(j)<>ord(i)), zij(j,i) + si(i)) <= di(i),
+****      $119,37              $154   $143,141,149 $149      $149
+****  37  '=l=' or '=e=' or '=g=' operator expected
+**** 119  Number (primary) expected
+**** 141  Symbol declared but no values have been assigned. Check for missing
+****         data definition, assignment, data loading or implicit assignment
+****         via a solve statement. Suppress with $onImplicitAssign.
+****         A wild shot: You may have spurious commas in the explanatory
+****         text of a declaration. Check symbol reference list.
+**** 143  A suffix is missing
+**** 149  Uncontrolled set entered as constant
+**** 154  Set for 'ord' is not controlled
+  31        sum(j$(ord(j)<>ord(i)), zij(i,j) + si(i)) =l= di(i) + sum(j, zij(j,i)),
+****          $8,409
+****   8  ')' expected
+**** 409  Unrecognizable item - skip to find a new statement
+****        looking for a ';' or a key word to get started again
+  32        sum(j$(ord(j)<>ord(i)), zij(i,j) + si(i)) =g= di(i) + sum(j, zij(j,i))
+  33     );
+  34   
+  35   
+  36   
+  37  Model airAmbulanceReassignment /all/;
+  38  solve airAmbulanceReassignment using mip minimizing obj;
+****                                                        $243,257
+**** 243  Objective is not a variable
+**** 257  Solve statement not checked because of previous errors
+  39   
+  40  *Display zij.l, si.l, di, sum(i, si.l(i)), sum(i, di(i)), sum((i,j)$[ord(i)<>ord(j)], zij.l(i,j));
+  41   
+
+**** 12 ERROR(S)   0 WARNING(S)
+
+
+COMPILATION TIME     =        0.015 SECONDS      3 MB  45.3.0 c4c31d8a WEX-WEI
+
+
+USER: GAMS Demo, for EULA and demo limitations see   G230930/0001CB-GEN
+      https://www.gams.com/latest/docs/UG%5FLicense.html         DC0000
+
+
+**** FILE SUMMARY
+
+Input      C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+Output     C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.lst
+
+**** USER ERROR(S) ENCOUNTERED

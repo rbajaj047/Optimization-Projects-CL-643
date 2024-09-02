@@ -1,0 +1,97 @@
+GAMS 45.3.0  c4c31d8a Nov 11, 2023          WEX-WEI x86 64bit/MS Windows - 11/27/23 16:41:03 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+   1  set V /1*40/;
+   2  scalars nrow /5/, ncol /8/;
+   3  scalar steps /12/;
+   4   
+   5  alias(V,i,j);
+   6   
+   7  set arc(i,j);
+   8   
+   9  parameter p(V) /1 2, 2 0, 3 3, 4 0, 5 1, 6 0, 7 0, 8 2,
+  10  9 0, 10 3, 11 0, 12 0, 13 0, 14 0, 15 4, 16 0,
+  11  17 4, 18 0, 19 1, 20 0, 21 0, 22 4, 23 0, 24 1,
+  12  25 0, 26 0, 27 -100, 28 2, 29 2, 30 -100, 31 0, 32 0,
+  13  33 0, 34 0, 35 2, 36 0, 37 0, 38 2, 39 0, 40 0/;
+  14   
+  15  arc(i,j) = yes\$(abs(ord(i)-ord(j))=ncol or (ord(j)-ord(i))\$(mod(ord(i),ncol) ne 0 and
+****                $409
+**** 409  Unrecognizable item - skip to find a new statement
+****        looking for a ';' or a key word to get started again
+  16  mod(ord(j),ncol) ne 1)=1 or (ord(i)-ord(j))\$(mod(ord(j),ncol) ne 0 and mod(ord(i),ncol) ne 1)=1);
+  17   
+  18  binary variable
+  19  y(V)
+  20  x(i,j)
+  21  delta(v);
+  22   
+  23  positive variable
+  24  u(V);
+  25   
+  26  variable
+  27  obj;
+  28   
+  29  equations
+  30  connections(i)
+  31  connections2(j)
+  32  loop_size
+  33  mtz(i,j)
+  34  assign1(V)
+  35  assign2(V)
+  36  objective
+  37  assign3;
+  38   
+  39  objective.. sum(v,p(v)*y(v)) =e= obj;
+  40   
+  41  loop_size.. sum(V,y(V)) =e= steps;
+  42   
+  43  connections(i).. sum(j\$arc(i,j),x(i,j)) =e= y(i);
+****                        $10,119   $8,37,409
+****   8  ')' expected
+****  10  ',' expected
+****  37  '=l=' or '=e=' or '=g=' operator expected
+**** 119  Number (primary) expected
+**** 409  Unrecognizable item - skip to find a new statement
+****        looking for a ';' or a key word to get started again
+  44   
+  45  connections2(j).. sum(i\$arc(i,j),x(i,j)) =e= y(j);
+****                         $10,119   $8,37,409
+****   8  ')' expected
+****  10  ',' expected
+****  37  '=l=' or '=e=' or '=g=' operator expected
+**** 119  Number (primary) expected
+**** 409  Unrecognizable item - skip to find a new statement
+****        looking for a ';' or a key word to get started again
+  46   
+  47  assign1(V).. u(V)-delta(V) =g= 0;
+  48   
+  49  assign2(V).. u(V) +(steps-1)*delta(V) =l= steps;
+  50   
+  51  assign3.. sum(V,delta(V)) =e= 1;
+  52   
+  53  mtz(i,j)$(ord(i) ne ord(j)).. u(i)-u(j) + steps*(x(i,j)-delta(j)) =l= steps-1;
+  54   
+  55  model project /all/;
+  56  solve project using mip max obj;
+****                                 $257
+**** 257  Solve statement not checked because of previous errors
+
+**** 12 ERROR(S)   0 WARNING(S)
+
+
+COMPILATION TIME     =        0.015 SECONDS      3 MB  45.3.0 c4c31d8a WEX-WEI
+
+
+USER: GAMS Demo, for EULA and demo limitations see   G230930/0001CB-GEN
+      https://www.gams.com/latest/docs/UG%5FLicense.html         DC0000
+
+
+**** FILE SUMMARY
+
+Input      C:\Users\rashm\Downloads\CL643project\rogoPuzzle.gms
+Output     C:\Users\rashm\Downloads\CL643project\rogoPuzzle.lst
+
+**** USER ERROR(S) ENCOUNTERED

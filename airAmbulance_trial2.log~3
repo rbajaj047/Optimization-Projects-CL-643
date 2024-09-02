@@ -1,0 +1,96 @@
+
+--- Job airAmbulance_trial2.gms Start 11/27/23 15:27:18 45.3.0 c4c31d8a WEX-WEI x86 64bit/MS Windows
+--- Applying:
+    C:\GAMS\45\gmsprmNT.txt
+--- GAMS Parameters defined
+    Input C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    PageSize 0
+    ScrDir C:\Users\rashm\Downloads\CL643project\225a\
+    SysDir C:\GAMS\45\
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+Licensee: GAMS Demo, for EULA and demo limitations see   G230930/0001CB-GEN
+          https://www.gams.com/latest/docs/UG%5FLicense.html         DC0000
+          C:\GAMS\45\gamslice.txt
+          Demo license for demonstration and instructional purposes only
+Processor information: 1 socket(s), 4 core(s), and 8 thread(s) available
+GAMS 45.3.0   Copyright (C) 1987-2023 GAMS Development. All rights reserved
+--- Starting compilation
+--- airAmbulance_trial2.gms(29) 3 Mb 17 Errors
+*** Error 120 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Unknown identifier entered as set
+*** Error 340 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    A label/element with the same name exist. You may have forgotten
+       to quote a label/element reference. For example,
+       set i / a,b,c /; parameter x(i); x('a') = 10;
+*** Error 120 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Unknown identifier entered as set
+*** Error 340 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    A label/element with the same name exist. You may have forgotten
+       to quote a label/element reference. For example,
+       set i / a,b,c /; parameter x(i); x('a') = 10;
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 300 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Remaining errors not printed for this line
+--- airAmbulance_trial2.gms(31) 3 Mb 23 Errors
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+--- airAmbulance_trial2.gms(33) 3 Mb 29 Errors
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+*** Error 171 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Domain violation for set
+--- airAmbulance_trial2.gms(36) 3 Mb 31 Errors
+*** Error 243 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Objective is not a variable
+*** Error 257 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Solve statement not checked because of previous errors
+--- airAmbulance_trial2.gms(38) 3 Mb 36 Errors
+*** Error 141 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Symbol declared but no values have been assigned. Check for missing
+       data definition, assignment, data loading or implicit assignment
+       via a solve statement. Suppress with $onImplicitAssign.
+       A wild shot: You may have spurious commas in the explanatory
+       text of a declaration. Check symbol reference list.
+*** Error 567 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    No suffix for SET, PARAMETER, or ACRONYM allowed
+*** Error 192 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Identifier or quoted string expected
+*** Error 567 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    No suffix for SET, PARAMETER, or ACRONYM allowed
+*** Error 409 in C:\Users\rashm\Downloads\CL643project\airAmbulance_trial2.gms
+    Unrecognizable item - skip to find a new statement
+      looking for a ';' or a key word to get started again
+--- airAmbulance_trial2.gms(38) 3 Mb 36 Errors
+*** Status: Compilation error(s)
+--- Job airAmbulance_trial2.gms Stop 11/27/23 15:27:18 elapsed 0:00:00.006

@@ -1,0 +1,229 @@
+GAMS 45.3.0  c4c31d8a Nov 11, 2023          WEX-WEI x86 64bit/MS Windows - 11/28/23 23:10:48 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+   1  Sets
+   2      i loca/ 1*5 /;
+   3  Alias(i,j);
+   4   
+   5  Parameters
+   6      xi(i)    'x-coordinate for location i'
+   7      / 1 36, 2 23, 3 23, 4 10, 5 5 /
+   8      yi(i)    'y-coordinate for location i'
+   9      / 1 20, 2 30, 3 56, 4 15, 5 5 /
+  10      di(i)    'Projected demand for next period for location i'
+  11      / 1 7, 2 3, 3 2, 4 4, 5 2 /
+  12      si(i)    'Number of helicopters currently assigned to location i'
+  13      / 1 6, 2 2, 3 3, 4 3, 5 4 /;
+  14   
+  15  Scalar
+  16      c 'Transportation cost per kilometer'
+  17      / 100 /;
+  18   
+  19  Variables
+  20      myvar, zij 'Number of helicopters to be moved from location i to j';
+  21   
+  22  Positive Variables zij;
+  23   
+  24  Equations
+  25      obj 'Objective Function', balance1(i), balance2(i);
+  26   
+  27  obj.. myvar =e= sum((i,j), sqrt(sqr(xi(j)- xi(i)) + sqr(yi(j)-yi(i))) * c * zij(i,j));
+  28  * Constraints
+  29  balance1(i)$(sum(j, di(j)) > sum(j, si(j)))..
+  30      sum(j, zij(j, i)) + si(i) =g= di(i) + sum(j, zij(i, j));
+  31   
+  32  balance2(i)$(sum(j, di(j)) <= sum(j, si(j)))..
+  33      sum(j, zij(j, i)) + si(i) =l= di(i) + sum(j, zij(i, j));
+  34   
+  35  Model airAmbulanceReassignment /all/;
+  36  solve airAmbulanceReassignment using mip minimizing myvar;
+  37   
+  38   
+  39   
+
+
+COMPILATION TIME     =        0.000 SECONDS      3 MB  45.3.0 c4c31d8a WEX-WEI
+GAMS 45.3.0  c4c31d8a Nov 11, 2023          WEX-WEI x86 64bit/MS Windows - 11/28/23 23:10:48 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE airAmbulanceReassignment Using MIP From line 36
+
+
+---- obj  =E=  Objective Function
+
+obj..  myvar - 1640.12194668567*zij(1,2) - 3827.53184180093*zij(1,3) - 2647.64045897475*zij(1,4) - 3443.83507154451*zij(1,5) - 1640.12194668567*zij(2,1) - 2600*zij(2,3) - 1984.94332412792*zij(2,4) - 3080.58436014987*zij(2,5) - 3827.53184180093*zij(3,1) - 2600*zij(3,2) - 4301.16263352131*zij(3,4) - 5408.32691319598*zij(3,5) - 2647.64045897475*zij(4,1) - 1984.94332412792*zij(4,2) - 4301.16263352131*zij(4,3) - 1118.03398874989*zij(4,5) - 3443.83507154451*zij(5,1) - 3080.58436014987*zij(5,2) - 5408.32691319598*zij(5,3) - 1118.03398874989*zij(5,4) =E= 0 ; (LHS = 0)
+     
+
+---- balance1  =G=  
+
+                NONE
+
+
+---- balance2  =L=  
+
+balance2(1)..  - zij(1,2) - zij(1,3) - zij(1,4) - zij(1,5) + zij(2,1) + zij(3,1) + zij(4,1) + zij(5,1) =L= 1 ; (LHS = 0)
+     
+balance2(2)..  zij(1,2) - zij(2,1) - zij(2,3) - zij(2,4) - zij(2,5) + zij(3,2) + zij(4,2) + zij(5,2) =L= 1 ; (LHS = 0)
+     
+balance2(3)..  zij(1,3) + zij(2,3) - zij(3,1) - zij(3,2) - zij(3,4) - zij(3,5) + zij(4,3) + zij(5,3) =L= -1 ; (LHS = 0, INFES = 1 ****)
+     
+REMAINING 2 ENTRIES SKIPPED
+
+GAMS 45.3.0  c4c31d8a Nov 11, 2023          WEX-WEI x86 64bit/MS Windows - 11/28/23 23:10:48 Page 3
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE airAmbulanceReassignment Using MIP From line 36
+
+
+---- myvar  
+
+myvar
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       obj
+
+
+---- zij  Number of helicopters to be moved from location i to j
+
+zij(1,2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+    -1640.1219  obj
+       -1       balance2(1)
+        1       balance2(2)
+
+zij(1,3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+    -3827.5318  obj
+       -1       balance2(1)
+        1       balance2(3)
+
+zij(1,4)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+    -2647.6405  obj
+       -1       balance2(1)
+        1       balance2(4)
+
+REMAINING 17 ENTRIES SKIPPED
+GAMS 45.3.0  c4c31d8a Nov 11, 2023          WEX-WEI x86 64bit/MS Windows - 11/28/23 23:10:48 Page 4
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Range Statistics    SOLVE airAmbulanceReassignment Using MIP From line 36
+
+
+RANGE STATISTICS (ABSOLUTE NON-ZERO FINITE VALUES)
+
+RHS       [min, max] : [ 1.000E+00, 2.000E+00] - Zero values observed as well
+Bound     [min, max] : [        NA,        NA] - Zero values observed as well
+Matrix    [min, max] : [ 1.000E+00, 5.408E+03]
+
+GAMS 45.3.0  c4c31d8a Nov 11, 2023          WEX-WEI x86 64bit/MS Windows - 11/28/23 23:10:48 Page 5
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE airAmbulanceReassignment Using MIP From line 36
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           3     SINGLE EQUATIONS            6
+BLOCKS OF VARIABLES           2     SINGLE VARIABLES           21
+NON ZERO ELEMENTS            61
+
+
+GENERATION TIME      =        0.093 SECONDS      4 MB  45.3.0 c4c31d8a WEX-WEI
+GAMS 45.3.0  c4c31d8a Nov 11, 2023          WEX-WEI x86 64bit/MS Windows - 11/28/23 23:10:48 Page 6
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE airAmbulanceReassignment Using MIP From line 36
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   airAmbulanceReassignment   OBJECTIVE  myvar
+     TYPE    MIP                        DIRECTION  MINIMIZE
+     SOLVER  CPLEX                      FROM LINE  36
+
+**** SOLVER STATUS     1 Normal Completion
+**** MODEL STATUS      1 Optimal
+**** OBJECTIVE VALUE             7161.8691
+
+ RESOURCE USAGE, LIMIT          0.000 10000000000.000
+ ITERATION COUNT, LIMIT         4    2147483647
+*** This solver runs with a demo license. No commercial use.
+--- GMO setup time: 0.00s
+--- GMO memory 0.50 Mb (peak 0.50 Mb)
+--- Dictionary memory 0.00 Mb
+--- Cplex 22.1.1.0 link memory 0.00 Mb (peak 0.00 Mb)
+--- Starting Cplex
+
+
+--- LP status (1): optimal.
+--- Cplex Time: 0.00sec (det. 0.02 ticks)
+
+
+Optimal solution found
+Objective:         7161.869060
+
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU obj                 .              .              .             1.0000      
+
+  obj  Objective Function
+
+---- EQU balance1  
+
+                NONE
+
+
+---- EQU balance2  
+
+         LOWER          LEVEL          UPPER         MARGINAL
+
+1        -INF            1.0000         1.0000          .          
+2        -INF            1.0000         1.0000      -363.2507      
+3        -INF           -1.0000        -1.0000     -2963.2507      
+4        -INF            1.0000         1.0000     -2325.8011      
+5        -INF           -2.0000        -2.0000     -3443.8351      
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR myvar             -INF         7161.8691        +INF             .          
+
+---- VAR zij  Number of helicopters to be moved from location i to j
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+1.2          .              .            +INF         2003.3727      
+1.3          .              .            +INF         6790.7826      
+1.4          .              .            +INF         4973.4415      
+1.5          .              .            +INF         6887.6701      
+2.1          .              .            +INF         1276.8712      
+2.3          .              .            +INF         5200.0000      
+2.4          .              .            +INF         3947.4937      
+2.5          .              .            +INF         6161.1687      
+3.1          .              .            +INF          864.2811      
+3.2          .             1.0000        +INF             .          
+3.4          .              .            +INF         3663.7130      
+3.5          .              .            +INF         5888.9113      
+4.1          .              .            +INF          321.8394      
+4.2          .              .            +INF           22.3930      
+4.3          .              .            +INF         4938.6123      
+4.5          .              .            +INF         2236.0680      
+5.1          .             1.0000        +INF             .          
+5.2          .              .            +INF             .          
+5.3          .              .            +INF         4927.7426      
+5.4          .             1.0000        +INF             .          
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+
+
+EXECUTION TIME       =        0.265 SECONDS      4 MB  45.3.0 c4c31d8a WEX-WEI
+
+
+USER: GAMS Demo, for EULA and demo limitations see   G230930/0001CB-GEN
+      https://www.gams.com/latest/docs/UG%5FLicense.html         DC0000
+
+
+**** FILE SUMMARY
+
+Input      C:\Users\rashm\Downloads\CL643project\airAmbulance_trial1.gms
+Output     C:\Users\rashm\Downloads\CL643project\airAmbulance_trial1.lst

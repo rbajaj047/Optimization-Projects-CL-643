@@ -1,0 +1,16 @@
+B 3 C o m p i l a t i o n
+B 50 Equation Listing    SOLVE airAmbulanceReassignment Using MIP From line 36
+D 53 obj
+D 58 balance1
+D 63 balance2
+B 75 Column Listing      SOLVE airAmbulanceReassignment Using MIP From line 36
+E 78 myvar
+E 85 zij
+B 108 Range Statistics    SOLVE airAmbulanceReassignment Using MIP From line 36
+B 119 Model Statistics    SOLVE airAmbulanceReassignment Using MIP From line 36
+B 132 Solution Report     SOLVE airAmbulanceReassignment Using MIP From line 36
+F 165 obj
+F 169 balance1
+F 174 balance2
+G 186 myvar
+G 188 zij
